@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
-const myApiUrl = 'https://abcd-6e3c3.firebaseio.com/users';
+import { myApiUrl } from './constants';
 
-class Message extends Component {
+class User extends Component {
 
   state = {
     name: null,
@@ -11,7 +12,7 @@ class Message extends Component {
   }
 
   loadData = (id) => {
-    fetch(`${myApiUrl}/${id}.json`)
+    fetch(`${myApiUrl}/users/${id}.json`)
     .then(response => response.json())
     .then(data => {
       this.setState(data);
@@ -31,10 +32,19 @@ class Message extends Component {
   render() {
     return (
       <div>
-        Name: {this.state.name}, Surname: {this.state.surname}, Age: {this.state.age}
+        <div>
+          <ul>
+            <li>Name: {this.state.name}</li>
+            <li>Surname: {this.state.surname}</li>
+            <li>Age: {this.state.age}</li>
+          </ul>
+        </div>
+        <div>
+          <Link to="/">Back to home</Link>
+        </div>
       </div>
     )
   }
 }
 
-export default Message;
+export default User;
